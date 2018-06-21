@@ -11,7 +11,7 @@
 
     <!--<meta http-equiv="refresh" content="30">-->
 
-    <script defer src="https://pro.fontawesome.com/releases/v5.0.11/js/all.js" integrity="sha384-rAGYBPVpurUH2YLc/Skiv4TE1iQ/wAocPQdQT73UR0LEZ3Os2E3wGBn9fRISQJIK" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!--[if lt IE 9]>
@@ -62,12 +62,19 @@
 <?php } ?>
 
         <div class="page-header">
-            <h1>GPU Status <small class="hidden-xs">(Refreshed every 30 seconds)</small><a href="https://github.com/ThomasRobertFr/gpu-monitor" style="float:right"><img src="css/gh.png" height="20px"></a></h1>
+            <h1>GPU Status <small class="hidden-xs">(Refreshed every 30 seconds)</small><a href="https://github.com/jbcdnr/gpu-monitor" style="float:right"><img src="css/gh.png" height="20px"></a></h1>
         </div>
 
 <?php
 
-$HOSTS = array("fb" => "Facebook",  "pascal" => "Pascal", "chic" => "Chic <small style=\"font-size: 40%\">(CUDA 9)</small>", "nile" => "Nile", "rodgers" => "Rodgers", "pas" => "Pas", "cal" => "Cal", "titan" => "Titan", "bigcountry" => "Big Country"); // , "kepler" => "Kepler", "tesla" => "Tesla", "drunk" => "Drunk");
+$HOSTS = array();
+foreach (scandir('data/') as $file) {
+    $res = preg_match('/.*(iccluster\d\d\d).*/', $file, $matches);
+    if ($res == 1) {
+        $HOSTS[$matches[1]] = $matches[1];
+    }
+}
+
 $SHORT_GPU_NAMES = array("GeForce GTX TITAN X" => "Titan X Maxwell", "TITAN X (Pascal)" => "Titan X Pascal", "TITAN Xp" => "Titan Xp", "GeForce GTX 980" => "GTX 980", "Tesla P100-PCIE-16GB" => "Tesla P100");
 $SHORTER_GPU_NAMES = array("GeForce GTX TITAN X" => "X Max", "TITAN X (Pascal)" => "X Pas", "TITAN Xp" => "Xp", "GeForce GTX 980" => "GTX 980", "Tesla K20m" => "K20m", "Tesla M2090" => "M2090", "Tesla P100-PCIE-16GB" => "P100");
 $GPU_COLS_LIST = array("index", "uuid",   "name", "memory.used", "memory.total", "utilization.gpu", "utilization.memory", "temperature.gpu", "timestamp");
@@ -348,7 +355,7 @@ foreach ($HOSTS as $hostname => $hosttitle) {
             ?>
 
             <td class="td-comment" data-name="<?php echo $comment["name"] ?>" data-comment="<?php echo $comment["comment"] ?>" data-date="<?php echo $comment["date"] ?>" data-host="<?php echo $hostname ?>" data-id="<?php echo $gpu['index'] ?>">
-                <button class="btn btn-default btn-xs comment-btn"><i class="fas fa-pencil"></i></button>
+                <button class="btn btn-default btn-xs comment-btn"><i class="fas fa-pencil-alt"></i></button>
                 <?php if ($comment["date"] && $comment["name"]) { ?>
                     <span class="label label-comment label-<?php echo ($date > $now) ? "danger" : "default"; ?>" data-toggle="tooltip" data-placement="top" title="<?php echo $comment["comment"]; ?>"><?php echo $comment["name"].' ('.$diff_disp.($date > $now ? "" : " ago").')'; if ($comment["comment"]) echo '&nbsp;&nbsp;<i class="fas fa-comment"></i>'; ?></span>
                 <?php } ?>

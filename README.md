@@ -1,5 +1,16 @@
 # GPU Monitor
 
+### About this fork
+
+This is a fork used by the [MLO](https://mlo.epfl.ch/) lab. We only adapt some of the script to our architecture and try to stick with the original. We try to rebase on the upstream as often as possible. We keep track of the changes we introduced:
+
+- auto detection of iccluster nodes in `index.php`
+- docker deployment in `docker/`
+
+Orignal README below.
+
+---
+
 This is a tool intended to monitor the GPU usage on the various GPU-servers at the LIP6 Lab, UPMC, Paris. This code has been written with the "quickest and dirtiest" principle in mind, it is absolutely awful, please do not read it :persevere:
 
 The principle is as follows. A bunch of Bash / Python scripts runs regularly `nvidia-smi` and `ps` to extract data and sends them to my `public_html` space. Each time someone wants to see the status of the GPUs, the page `index.php` reads the latest data files for each server and displays those.

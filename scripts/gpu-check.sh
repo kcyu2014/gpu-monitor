@@ -1,5 +1,7 @@
 #!/bin/bash
 
+script_path=/mlodata1/gpu-monitor/scripts
+
 if [ "$1" = "kill" ]; then
 	pid=`ps -x | grep 'gpu-run.s[h] 1' | sed 's/\([0-9]\+\)\s.\+$/\1/'`
 	if [ "${pid:-null}" != null ]; then
@@ -25,7 +27,7 @@ else
 
 	if [ "${RESULT:-null}" = null ]; then
 		echo "Launch"
-		HOST=$1 /home/robert/gpuMonitor/gpu-run.sh 1 &
+		HOST=$1 $script_path/gpu-run.sh 1 &
 	else
 		echo "Running"
 	fi
@@ -34,7 +36,7 @@ else
 
 	if [ "${RESULT:-null}" = null ]; then
 		echo "Launch"
-		HOST=$1 /home/robert/gpuMonitor/gpu-run.sh 2 &
+		HOST=$1 $script_path/gpu-run.sh 2 &
 	else
 		echo "Running"
 	fi
@@ -43,7 +45,7 @@ else
 
 	if [ "${RESULT:-null}" = null ]; then
 		echo "Launch"
-		HOST=$1 /home/robert/gpuMonitor/gpu-run.sh 3 $2 &
+		HOST=$1 $script_path/gpu-run.sh 3 $2 &
 	else
 		echo "Running"
 	fi

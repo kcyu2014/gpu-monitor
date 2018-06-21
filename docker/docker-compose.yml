@@ -1,0 +1,14 @@
+php:
+  image: mlo-php
+  volumes:
+    - /mlodata1:/mlodata1
+
+web:
+  image: mlo-nginx
+  ports:
+    - "80:8080"
+  volumes_from:
+    - php
+  links:
+    - php
+
