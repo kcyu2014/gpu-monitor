@@ -67,6 +67,8 @@
 
 <?php
 
+date_default_timezone_set("Europe/Zurich");
+
 $HOSTS = array();
 foreach (scandir('data/') as $file) {
     $res = preg_match('/.*(iccluster\d\d\d).*/', $file, $matches);
