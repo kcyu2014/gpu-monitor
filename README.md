@@ -2,7 +2,7 @@
 
 ### About this fork
 
-This is a fork used by the [MLO](https://mlo.epfl.ch/) lab. We only adapt some of the script to our architecture and try to stick with the original. We try to rebase on the upstream as often as possible. We keep track of the changes we introduced:
+This is a fork used by the [CVLAB](https://cvlab.epfl.ch/) lab. We only adapt some of the script to our architecture and try to stick with the original. We try to rebase on the upstream as often as possible. We keep track of the changes we introduced:
 
 - auto detection of iccluster nodes in `index.php`
 - docker deployment in `docker/`
